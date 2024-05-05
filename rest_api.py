@@ -9,7 +9,7 @@ with open(file_path, 'rb') as file:
     response = requests.post(url, files=files)
 
 if response.status_code == 200:
-    print(response)
+    print(response.text)
     print('File uploaded successfully!')
 else:
     print('Failed to upload file:', response.text)
