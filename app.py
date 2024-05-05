@@ -7,6 +7,7 @@ app = Flask(__name__)
 def upload_file():
     file = request.files['file']
     if file.filename.endswith('.mp3'):
+        file.save('/path/to/save/file.mp3')
         return 'hello'
     else:
         return 'Invalid file format'
