@@ -1,10 +1,13 @@
-import tensorflow as tf
-from tensorflow.keras.models import load_model
+import pickle
+import numpy as np
+from sklearn.ensemble import RandomForestClassifier
+# import tensorflow as tf
+# from tensorflow.keras.models import load_model
 import librosa
 import librosa.util as librosa_util
-import numpy as np
+# import numpy as np
 
-loaded_model = load_model('zcr_model.keras')
+# loaded_model = load_model('zcr_model.keras')
 
 def extract_zcr(audio_path, window_size=0.02, hop_length=0.01, max_len=100):
     """
@@ -33,8 +36,13 @@ def extract_zcr(audio_path, window_size=0.02, hop_length=0.01, max_len=100):
 
     return np.array(zcr_features[:max_len])
 
+# Load the model
+with open('rf_model.pkl', 'rb') as f:
+  loaded_rf = pickle.load(f)
+
 
 if __name__ == '__main__':
     audio_path = 'sample-000000.mp3'
     zcr_features = extract_zcr(audio_path)
-    print(loaded_model.predict(np.array([zcr_features])))
+    # print(np.array([zcr_features]))
+    print(loaded_rf.predict(np.array([zcr_features])))
