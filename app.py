@@ -6,8 +6,8 @@ app = Flask(__name__)
 @app.route('/upload', methods=['POST'])
 def upload_file():
     file = request.files['file']
-    if file.filename.endswith('.mp3'):
-        file.save('file.mp3')
+    if file:
+        file.save()
         zcr_features = extract_zcr('file.mp3')
         prediction = loaded_rf.predict(np.array([zcr_features]))[0]
         return f'Prediction: {prediction}'

@@ -42,7 +42,7 @@ with open('rf_model.pkl', 'rb') as f:
 
 
 if __name__ == '__main__':
-    audio_path = 'sample-000000.mp3'
+    audio_path = 'recorded_voice.mp3'
     zcr_features = extract_zcr(audio_path)
     # print(np.array([zcr_features]))
     print(loaded_rf.predict(np.array([zcr_features])))
