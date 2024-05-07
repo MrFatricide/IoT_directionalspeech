@@ -7,8 +7,9 @@ app = Flask(__name__)
 def upload_file():
     file = request.files['file']
     if file:
-        file.save()
-        zcr_features = extract_zcr('file.mp3')
+        file_name = 'file.wav'
+        file.save(file_name)
+        zcr_features = extract_zcr(file_name)
         prediction = loaded_rf.predict(np.array([zcr_features]))[0]
         return f'Prediction: {prediction}'
     else:
